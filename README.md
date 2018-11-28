@@ -42,13 +42,13 @@ jnif -p hello -o ../helloworld build/java/classes/HelloWorld.class
 ![build.gradle 文件修改](doc/IDEA_3.jpg)
 
 4、点击 IDEA 的 gradle 工具栏或直接在 Terminal 中输入 gradle assemble。
-此时，我们已经可以在 build 目录下找到 Java 编译生成的 class 文件或者 jar 包：
+此时，可以在 build 目录下找到 Java 编译生成的 class 文件或者 jar 包：
 
 ![Java build](doc/IDEA_4.jpg)
 
 根据 jnif 工具选项说明，上图两处标红的目录使用哪一个都是可以的。
 
-5、我们创建 Go 工程目录并运行 jnif 工具：
+5、创建 Go 工程目录并运行 jnif 工具：
 
 ```bash
 mkdir -p gopath/src/hello
@@ -57,11 +57,11 @@ echo "package main\n\nfunc main() {}\n" >gopath/src/hello/main.go
 jnif -o gopath/src/hello build/libs/demo-1.0-SNAPSHOT.jar
 ```
 
-这里我们使用了 jar 包（build/libs/demo-1.0-SNAPSHOT.jar）。执行成功后会发现，`gopath/src/hello` 目录下多了两个文件 `libs.c` 和 `libs.go`：
+这里使用了 jar 包（build/libs/demo-1.0-SNAPSHOT.jar）。执行成功后会发现，`gopath/src/hello` 目录下多了两个文件 `libs.c` 和 `libs.go`：
 
 ![gopath](doc/IDEA_5.jpg)
 
-6、我们修改新生成的 `libs.go` 文件内如如下：
+6、修改新生成的 `libs.go` 文件内如如下：
 
 ```go
 package main
