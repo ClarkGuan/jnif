@@ -52,7 +52,7 @@ jnif -p hello -o ../helloworld build/java/classes/HelloWorld.class
 
 ```bash
 mkdir -p gopath/src/hello
-echo -e "package main\n\nfunc main() {}\n" >gopath/src/hello/main.go
+echo -e "package main\n\nfunc main() {}" >gopath/src/hello/main.go
 jnif -o gopath/src/hello build/libs/demo-1.0-SNAPSHOT.jar
 ```
 
