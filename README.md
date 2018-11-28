@@ -19,10 +19,18 @@ go get github.com/ClarkGuan/jnif
 * o: 生成文件所在目录的路径。默认为 $PWD 的值
 * 指定的 jar 或 class 文件或包含他们的目录路径
 
-举例：
+例如
 
 ```bash
 jnif -p hello -o ../helloworld build/java/classes/HelloWorld.class
 ```
 
 在目录 `../helloworld` 生成文件 `libs.c` 和 `libs.go`。
+
+#### 以 Intellij IDEA 工程举例
+
+1、如下图，我们创建基于 Gradle 的 Java 工程：
+
+[基于 Gradle 的 Java 工程](doc/IDEA_1.png)
+
+
