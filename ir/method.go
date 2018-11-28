@@ -202,10 +202,15 @@ func (m *Method) GolangType() string {
 	fmt.Fprintf(buf, "func %s(\n\t", m.GoFuncName())
 
 	fmt.Fprintf(buf, "env uintptr,\n\t")
+
+	dot := ","
+	if len(m.arguments) == 0 {
+		dot = ""
+	}
 	if m.IsStatic() {
-		fmt.Fprintf(buf, "clazz uintptr, /* java.lang.Class */")
+		fmt.Fprintf(buf, "clazz uintptr%s /* java.lang.Class */", dot)
 	} else {
-		fmt.Fprintf(buf, "thiz uintptr, /* %s */",
+		fmt.Fprintf(buf, "thiz uintptr%s /* %s */", dot,
 			strings.Replace(m.className, "/", ".", -1))
 	}
 

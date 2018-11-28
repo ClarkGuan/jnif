@@ -95,7 +95,7 @@ func jniOnUnload(vm uintptr) {
 //export edu_buaa_demo_Main_helloFromJni
 func edu_buaa_demo_Main_helloFromJni(
 	env uintptr,
-	clazz uintptr, /* java.lang.Class */) uintptr /* java.lang.String */ {
+	clazz uintptr /* java.lang.Class */) uintptr /* java.lang.String */ {
 	jenv := jni.Env(env)
 	return jenv.NewString("Hello from Golang")
 }
