@@ -55,9 +55,7 @@ void JNI_OnUnload(JavaVM *vm, void *reserved) {
 }
 `
 
-const goTpl = `// 此文件为动态生成的，请不要修改！
-
-package {{.packageName}}
+const goTpl = `package {{.packageName}}
 
 //
 // #include <stdlib.h>
