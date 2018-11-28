@@ -31,6 +31,6 @@ jnif -p hello -o ../helloworld build/java/classes/HelloWorld.class
 
 1、如下图，我们创建基于 Gradle 的 Java 工程：
 
-[基于 Gradle 的 Java 工程](doc/IDEA_1.png)
+![基于 Gradle 的 Java 工程](doc/IDEA_1.png)
 
 
