@@ -1,4 +1,4 @@
-package ir
+package interp
 
 import (
 	"fmt"
@@ -6,7 +6,24 @@ import (
 	"github.com/ClarkGuan/jnif/cff"
 )
 
-func Parse(path string) (methods map[string][]*Method, max int, err error) {
+func Print(args []string) error {
+	if len(args) == 0 || gRegisters[args[0]] == nil {
+		return noRegisterErr
+	}
+
+	transformer := gRegisters[args[0]]
+	if path, err := transformer.Init(args[1:]); err != nil {
+		return err
+	} else if methods, max, err := parse(path); err != nil {
+		return err
+	} else if err = transformer.Transform(methods, max); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func parse(path string) (methods map[string][]*Method, max int, err error) {
 	if infos, err := cff.Parse(path); err != nil {
 		return nil, 0, err
 	} else {
@@ -23,9 +40,9 @@ func Parse(path string) (methods map[string][]*Method, max int, err error) {
 
 				method := Method{}
 				method.Name = m.Name
-				method.className = info.Name
+				method.ClassName = info.Name
 				method.Desc = m.Desc
-				method.arguments, method.returnType = parseDesc(m.Desc)
+				method.Arguments, method.ReturnType = parseDesc(m.Desc)
 				method.Modifier = m.AccessFlags
 
 				if count, ok := funcs[m.Name]; ok {
@@ -81,7 +98,7 @@ const (
 	modeStateMask      = modeNormal | modeArray | modeObject
 )
 
-func parseDesc(desc string) (arguments []javaType, returnType javaType) {
+func parseDesc(desc string) (arguments []JavaType, returnType JavaType) {
 	mode := modeNormal
 	last := -1
 	for i, b := range desc {
@@ -122,10 +139,10 @@ func parseDesc(desc string) (arguments []javaType, returnType javaType) {
 			}
 
 			if mode&modeReturn == modeReturn {
-				returnType = javaType(desc[start : i+1])
+				returnType = JavaType(desc[start : i+1])
 				return
 			} else {
-				arguments = append(arguments, javaType(desc[start:i+1]))
+				arguments = append(arguments, JavaType(desc[start:i+1]))
 			}
 
 			mode &^= modeStateMask

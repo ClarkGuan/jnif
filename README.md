@@ -22,7 +22,7 @@ go get github.com/ClarkGuan/jnif
 例如
 
 ```bash
-jnif -p hello -o ../helloworld build/java/classes/HelloWorld.class
+jnif go -p hello -o ../helloworld build/java/classes/HelloWorld.class
 ```
 
 在目录 `../helloworld` 生成文件 `libs.c` 和 `libs.go`。
@@ -53,7 +53,7 @@ jnif -p hello -o ../helloworld build/java/classes/HelloWorld.class
 ```bash
 mkdir -p gopath/src/hello
 echo -e "package main\n\nfunc main() {}" >gopath/src/hello/main.go
-jnif -o gopath/src/hello build/libs/demo-1.0-SNAPSHOT.jar
+jnif go -o gopath/src/hello build/libs/demo-1.0-SNAPSHOT.jar
 ```
 
 这里使用了 jar 包（build/libs/demo-1.0-SNAPSHOT.jar）。执行成功后会发现，`gopath/src/hello` 目录下多了两个文件 `libs.c` 和 `libs.go`：
