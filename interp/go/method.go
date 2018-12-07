@@ -104,7 +104,7 @@ func golangType(m *interp.Method) string {
 	buf := new(bytes.Buffer)
 	fmt.Fprintf(buf, "func %s(\n\t", goFuncName(m))
 
-	fmt.Fprintf(buf, "env uintptr,\n\t")
+	fmt.Fprintf(buf, "ev uintptr,\n\t")
 
 	dot := ","
 	if len(m.Arguments) == 0 {
